@@ -22,7 +22,7 @@ def get_channel_videos(channel_url):
             return []
 
 
-channel_url = 'https://www.youtube.com/c/@Name/videos'
+channel_url = 'https://www.youtube.com/c/@Obsidian Time/videos'
 video_links = get_channel_videos(channel_url)
 
 if video_links:
