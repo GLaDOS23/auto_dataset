@@ -32,7 +32,7 @@ def transcribe_audio(segment, recognizer):
     with sr.AudioFile(segment) as source:
         audio_data = recognizer.record(source)
         try:
-            text = recognizer.recognize_google(audio_data, language='ru-RU')
+            text = recognizer.recognize_google(audio_data, language='en-US')#ru-RU
             #print(f"Transcribed text: {text}")
         except sr.UnknownValueError:
             #print("Google Speech Recognition could not understand audio")
@@ -86,13 +86,15 @@ def get_channel_videos(channel_url):
             #print(f"Error: {e}")
             return []
 
-channel_url = 'https://www.youtube.com/c/@Name/videos'
+channel_url = 'https://www.youtube.com/@Shylily/videos'
 video_links = get_channel_videos(channel_url)
 # Пример использования
 if __name__ == "__main__":
 
-    nom = 0
-
+    nom = 11
+   
+    #del video_links[0:nom]
+    
     if video_links:
         for link in video_links:
             #print(link)

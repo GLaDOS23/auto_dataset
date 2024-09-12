@@ -32,12 +32,12 @@ def transcribe_audio(segment, recognizer):
         audio_data = recognizer.record(source)
         try:
             text = recognizer.recognize_google(audio_data, language='ru-RU')
-            print(f"Transcribed text: {text}")
+            #print(f"Transcribed text: {text}")
         except sr.UnknownValueError:
-            print("Google Speech Recognition could not understand audio")
+            #print("Google Speech Recognition could not understand audio")
             text = ""
         except sr.RequestError as e:
-            print(f"Could not request results from Google Speech Recognition service; {e}")
+            #print(f"Could not request results from Google Speech Recognition service; {e}")
             text = f"Error: {e}"
     return text
 
@@ -50,15 +50,15 @@ def main(video_url):
     
     with open("transcription.txt", "w", encoding='utf-8') as f:
         for i, segment in enumerate(segments):
-            print(f"Processing segment {i + 1} of {len(segments)}")
+            #print(f"Processing segment {i + 1} of {len(segments)}")
             segment.export("segment.wav", format="wav")
             text = transcribe_audio("segment.wav", recognizer)
             f.write(text + '\n')
             os.remove("segment.wav")
     
-    print("Transcription completed successfully.")
+    #print("Transcription completed successfully.")
 
 # Пример использования
 if __name__ == "__main__":
-    video_url = "https://www.youtube.com/watch?v="
+    video_url = "https://www.youtube.com/watch?v=6YJ8NFYssoE"#"https://www.youtube.com/watch?v="
     main(video_url)
