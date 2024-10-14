@@ -86,15 +86,15 @@ def get_channel_videos(channel_url):
             #print(f"Error: {e}")
             return []
 
-channel_url = 'https://www.youtube.com/@Shylily/videos'
+channel_url = 'https://www.youtube.com/@Neuro-sama_RUS/videos'
 video_links = get_channel_videos(channel_url)
 # Пример использования
 if __name__ == "__main__":
 
-    nom = 11
+    nom = 0
    
     #del video_links[0:nom]
-    
+    video_links = ["https://www.youtube.com/watch?v=mImFz8mkaHo","https://www.youtube.com/watch?v=7z8DO1KhPFo","https://www.youtube.com/watch?v=djsJqNAGMuY","https://www.youtube.com/watch?v=63bUBEIhpNk","https://www.youtube.com/watch?v=rk0HBqSqpgg","https://www.youtube.com/watch?v=U7i6fi3z9Nk","https://www.youtube.com/watch?v=EOqw86OGIB0","https://www.youtube.com/watch?v=caR9ouipm8o"]
     if video_links:
         for link in video_links:
             #print(link)
