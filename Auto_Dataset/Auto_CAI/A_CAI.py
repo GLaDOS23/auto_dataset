@@ -4,7 +4,7 @@ import re
 import pyautogui
 import pyperclip
 import time
-
+import os
 
 def get_text_from_screen(x2, y2):
     #x2 = 624
@@ -68,23 +68,56 @@ if __name__ == "__main__":
     x2 = 238
     y2 = 968
     time.sleep(10)
+    # Открываем и читаем текстовый файл
+    with open('combined_file.txt', 'r', encoding='utf-8') as file:
+        text = file.read()
+
+    # Разбиваем текст по знакам препинания ., !, ?
+    sentences = re.split(r'[.!?]', text)
+
+    # Убираем лишние пробелы и пустые строки
+    sentences = [sentence.strip() for sentence in sentences if sentence.strip()]
+
+    # Выводим список предложений
+    for i, sentence in enumerate(sentences, start=1):
+        print(f"{i}: {sentence}")
+        paste_text_at(sentence, 180, 853)
+        time.sleep(2)
+        paste_text_at(sentence, 1183, 861)
+        
+        time.sleep(40)
+        
+        extracted_text1 = get_text_from_screen(211, 959)
+        time.sleep(2)
+        extracted_text2 = get_text_from_screen(1208, 961)
+      
+        # Записываем результат в файл
+        with open('outCaiT0_text.txt', 'a', encoding='utf-8') as file:
+            file.write(sentence + '\n' + extracted_text1 + '\n')
+        with open('outCaiT1_text.txt', 'a', encoding='utf-8') as file:
+            file.write(sentence + '\n' + extracted_text2 + '\n')
+
+        time.sleep(1)
+    time.sleep(60)
+    os.system('shutdown -s')
+'''
     while True:
        
         # Получение текста из указанной области экрана
-        extracted_text1 = get_text_from_screen(xp1, yp1)
-        time.sleep(1)
+        #extracted_text1 = get_text_from_screen(xp1, yp1)
+        #time.sleep(1)
 
-        paste_text_at(extracted_text1, x1, y1)
-        time.sleep(40)
+        #paste_text_at(extracted_text1, x1, y1)
+        #time.sleep(40)
         extracted_text2 = get_text_from_screen(xp2, yp2)
 
         time.sleep(1)
         paste_text_at(extracted_text2, x2, y2)
         # Записываем результат в файл
-        with open('outCai_text.txt', 'a', encoding='utf-8') as file:
+        with open('outCaiT_text.txt', 'a', encoding='utf-8') as file:
             file.write(extracted_text1 + '\n' + extracted_text2 + '\n')
 
         time.sleep(40)
 
-
+'''
 
