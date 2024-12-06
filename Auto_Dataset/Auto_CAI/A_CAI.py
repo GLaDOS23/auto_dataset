@@ -77,24 +77,30 @@ if __name__ == "__main__":
 
     # Убираем лишние пробелы и пустые строки
     sentences = [sentence.strip() for sentence in sentences if sentence.strip()]
+    print(len(sentences))
+    time.sleep(4)
+    nom_sentence = 0#848  535
+    del sentences[0:nom_sentence]
 
     # Выводим список предложений
+
     for i, sentence in enumerate(sentences, start=1):
+
         print(f"{i}: {sentence}")
-        paste_text_at(sentence, 180, 853)
+        paste_text_at(sentence,253, 985)
         time.sleep(2)
-        paste_text_at(sentence, 1183, 861)
+        paste_text_at(sentence, 1185, 980)
         
         time.sleep(40)
         
-        extracted_text1 = get_text_from_screen(211, 959)
+        extracted_text1 = get_text_from_screen(196, 878)
         time.sleep(2)
-        extracted_text2 = get_text_from_screen(1208, 961)
+        extracted_text2 = get_text_from_screen(1126, 877)
       
         # Записываем результат в файл
-        with open('outCaiT0_text.txt', 'a', encoding='utf-8') as file:
+        with open('outCaiT0(2)_text.txt', 'a', encoding='utf-8') as file:
             file.write(sentence + '\n' + extracted_text1 + '\n')
-        with open('outCaiT1_text.txt', 'a', encoding='utf-8') as file:
+        with open('outCaiT1(2)_text.txt', 'a', encoding='utf-8') as file:
             file.write(sentence + '\n' + extracted_text2 + '\n')
 
         time.sleep(1)
