@@ -79,6 +79,9 @@ def on_press_w(event):
     if event.name == '4':#для обновления генератора
         xp2, yp2 = pyautogui.position()
         print(f'1) проверка: x={xp2}, y={yp2}')
+    if event.name == '5':#для обновления генератора
+        x2, y2 = pyautogui.position()
+        print(f'1) рестарт: x={x2}, y={y2}')    
     '''
     if event.name == '3':
         xp2, yp2 = pyautogui.position()
@@ -96,8 +99,9 @@ def get_text_from_screen(xf2, yf2):
     time.sleep(0.2)
     #pyautogui.doubleClick()
     pyautogui.click()
-    time.sleep(0.2)  
-    pyautogui.hotkey('ctrl', 'c')
+    time.sleep(0.2)
+    pyautogui.click()
+    #pyautogui.hotkey('ctrl', 'c')
     # Извлечение текста из буфера обмена
     copied_text = pyperclip.paste()
     return copied_text
@@ -131,6 +135,12 @@ def paste_text_at(text, xf2, yf2):
     pyautogui.hotkey('ctrl', 'v')
     time.sleep(1)
     pyautogui.hotkey('enter')
+    time.sleep(0.2)
+    pyautogui.hotkey('enter')
+    time.sleep(0.2)
+    pyautogui.hotkey('enter')
+    time.sleep(0.2)
+    pyautogui.hotkey('enter')
     # Пауза для завершения вставки текста
     time.sleep(0.5)
 
@@ -153,7 +163,7 @@ def on_press(event):
         sentences = [sentence.strip() for sentence in sentences if sentence.strip()]
         print(len(sentences))
         time.sleep(4)
-        nom_sentence = 941
+        nom_sentence = 981
         del sentences[0:nom_sentence]
 
         # Выводим список предложений
@@ -191,21 +201,28 @@ def on_press(event):
                     break
                 else:
                     nom_text1T = 0
+
+                if extracted_text1 == sentence2:#проверка для рестарта страницы
+                    time.sleep(1)
+                    pyautogui.moveTo(x2, y2, duration=0.5)
+                    time.sleep(60)
+                    step = 23
+                else:
                     
-                extracted_text1T = extracted_text1
-                #print(extracted_text1T)
-                '''
-                time.sleep(2)
-                extracted_text2 = get_text_from_screen(x2, y2)
-                '''
-                # Записываем результат в файл
-                with open('Noita_outHAG1_text.txt', 'a', encoding='utf-8') as file:
-                    file.write(sentence + '\n' + extracted_text1 + '\n')
-                '''
-                with open('outCaiT1(2)_text.txt', 'a', encoding='utf-8') as file:
-                    file.write(sentence + '\n' + extracted_text2 + '\n')
-                '''
-                time.sleep(1)
+                    extracted_text1T = extracted_text1
+                    #print(extracted_text1T)
+                    '''
+                    time.sleep(2)
+                    extracted_text2 = get_text_from_screen(x2, y2)
+                    '''
+                    # Записываем результат в файл
+                    with open('Noita_outHAG1_text_T.txt', 'a', encoding='utf-8') as file:
+                        file.write(sentence + '\n' + extracted_text1 + '\n\n')
+                    '''
+                    with open('outCaiT1(2)_text.txt', 'a', encoding='utf-8') as file:
+                        file.write(sentence + '\n' + extracted_text2 + '\n')
+                    '''
+                    time.sleep(1)
             else:
                 pyautogui.moveTo(xu1, yu1, duration=0.5)
                 pyautogui.click()
@@ -216,7 +233,7 @@ def on_press(event):
                     paste_text_at(pred,xp1,yp1)
 
                     pyautogui.moveTo(xp2, yp2, duration=0.5)
-                    time.sleep(5)
+                    time.sleep(40)
                     while on_press_q(xp2, yp2):
                         time.sleep(5)
                     #time.sleep(40)
