@@ -153,7 +153,7 @@ def on_press(event):
     if event.name == 'q':
 
         # Открываем и читаем текстовый файл
-        with open('Compil_Noita2T.txt', 'r', encoding='utf-8') as file:
+        with open('Elli4.txt', 'r', encoding='utf-8') as file:
             text = file.read()
 
         # Разбиваем текст по знакам препинания ., !, ?
@@ -163,24 +163,32 @@ def on_press(event):
         sentences = [sentence.strip() for sentence in sentences if sentence.strip()]
         print(len(sentences))
         time.sleep(4)
-        nom_sentence = 981
+        nom_sentence = 2249
         del sentences[0:nom_sentence]
 
         # Выводим список предложений
         extracted_text1 = ""
         extracted_text1T = ""
-        nom_text1T = 0
-        stroc = ['Imagine that you are an AI', 'Imagine that you are a person with artificial intelligence', 'Imagine that you are a cheerful AI gamer','Imagine that you are an AI gamer communicating with an audience']
-        example = ['Please respond to the following requests with one small message. Imagine that you are an AI gamer, and briefly (no more than 5 sentences) react to this message: Peter is interesting but not useful to us','Imagine that you are an AI gamer, and briefly (no more than 5 sentences) react to this message: I want nothing to do with any of these guys','Imagine that you are an AI gamer, and briefly (no more than 5 sentences) react to this message: 230 Thomas Street off by a few minutes']
+        nom_text1T = 0# filian3.txt - 2035
+        #stroc = ['Imagine that you are an AI', 'Imagine that you are a person with artificial intelligence', 'Imagine that you are a cheerful AI gamer','Imagine that you are an AI gamer communicating with an audience']
+        example = ["Based on the sentence excerpt, generate a dialogue between the AI streamer and the viewer. Sentences should not be long. The dialogue should correspond to the style of the passage and the given topic. Keep in mind that an AI streamer is a character with a unique personality that can joke, ask questions, give advice, or share opinions. The viewer can ask questions, joke, express emotions, or keep up a conversation.\nFragment: is celebrated tonsils ripped in half and started speaking directly into her skull like a JBL speaker is she ok Google.\nExample of dialog design:\nviewer:...\nAI:...","Based on the sentence excerpt, generate a dialogue between the AI streamer and the viewer. Sentences should not be long. The dialogue should correspond to the style of the passage and the given topic. Keep in mind that an AI streamer is a character with a unique personality that can joke, ask questions, give advice, or share opinions. The viewer can ask questions, joke, express emotions, or keep up a conversation.\nFragment: I cannot turn off so please be nice I will watch whatever you guys send in you will never in a million years guess what this is an intro for.\nExample of dialog design:\nviewer:...\nAI:..."]
+
+        st = "Based on the sentence excerpt, generate a dialogue between the AI streamer and the viewer. Sentences should not be long. The dialogue should correspond to the style of the passage and the given topic. Keep in mind that an AI streamer is a character with a unique personality that can joke, ask questions, give advice, or share opinions. The viewer can ask questions, joke, express emotions, or keep up a conversation.\nFragment:"
+        
+        st3 = ".\nExample of dialog design:\nviewer:...\nAI:..."
         step = 0
         for i, sentence in enumerate(sentences, start=1):
             if step < 20:
                 step +=1
                 print(f"{i}: {sentence}")
                 #time.sleep(4000)
-                nom_pred = random.randint(2,5)
-                nom_fr= random.randint(0,3)
-                sentence2 = stroc[nom_fr] +', and briefly (about ' + str(nom_pred) + ' sentences) respond to this message: ' + sentence
+                #nom_pred = random.randint(2,5)
+                #nom_fr= random.randint(0,3)
+                #sentence2 = stroc[nom_fr] +', and briefly (about ' + str(nom_pred) + ' sentences) respond to this message: ' + sentence
+
+                sentence2 = st + " " + sentence + st3
+
+                
                 paste_text_at(sentence2,xp1,yp1 )
                 '''
                 time.sleep(2)
@@ -194,35 +202,40 @@ def on_press(event):
                 time.sleep(1)
                 extracted_text1 = get_text_from_screen(x1, y1)
                 # проверка на повторы
+                '''
                 result = compare_strings(extracted_text1, extracted_text1T)
                 if nom_text1T < 4 and result == 1:
                     nom_text1T +=1
                 elif nom_text1T >= 4:
-                    break
+                    step = 23
                 else:
                     nom_text1T = 0
-
+                '''
                 if extracted_text1 == sentence2:#проверка для рестарта страницы
                     time.sleep(1)
                     pyautogui.moveTo(x2, y2, duration=0.5)
-                    time.sleep(60)
+                    pyautogui.click()
+                    time.sleep(30)
+                    pyautogui.click()
+                    time.sleep(30)
                     step = 23
                 else:
-                    
-                    extracted_text1T = extracted_text1
-                    #print(extracted_text1T)
-                    '''
-                    time.sleep(2)
-                    extracted_text2 = get_text_from_screen(x2, y2)
-                    '''
-                    # Записываем результат в файл
-                    with open('Noita_outHAG1_text_T.txt', 'a', encoding='utf-8') as file:
-                        file.write(sentence + '\n' + extracted_text1 + '\n\n')
-                    '''
-                    with open('outCaiT1(2)_text.txt', 'a', encoding='utf-8') as file:
-                        file.write(sentence + '\n' + extracted_text2 + '\n')
-                    '''
-                    time.sleep(1)
+                    if extracted_text1T != extracted_text1:
+                        extracted_text1T = extracted_text1
+                        #print(extracted_text1T)
+                        '''
+                        time.sleep(2)
+                        extracted_text2 = get_text_from_screen(x2, y2)
+                        '''
+                        # Записываем результат в файл
+                         
+                        with open('Elli_T2.txt', 'a', encoding='utf-8') as file:
+                            file.write( extracted_text1 + '\n\n')
+                        '''
+                        with open('outCaiT1(2)_text.txt', 'a', encoding='utf-8') as file:
+                            file.write(sentence + '\n' + extracted_text2 + '\n')
+                        '''
+                        time.sleep(1)
             else:
                 pyautogui.moveTo(xu1, yu1, duration=0.5)
                 pyautogui.click()
@@ -237,11 +250,8 @@ def on_press(event):
                     while on_press_q(xp2, yp2):
                         time.sleep(5)
                     #time.sleep(40)
-                extracted_text1 = get_text_from_screen(x1, y1)
-                if '"' in extracted_text1:
-                    step = 20
-                else:
-                    step = 0
+
+
 
                 
         time.sleep(60)
@@ -249,33 +259,5 @@ def on_press(event):
 keyboard.on_press(on_press_w)
 keyboard.on_press(on_press)
 keyboard.wait('esc')  # Ждем нажатия клавиши esc для завершения программы
-'''
-    while True:
-       
-        # Получение текста из указанной области экрана
-        #extracted_text1 = get_text_from_screen(xp1, yp1)
-        #time.sleep(1)
 
-        #paste_text_at(extracted_text1, x1, y1)
-        #time.sleep(40)
-        extracted_text2 = get_text_from_screen(xp2, yp2)
-
-        time.sleep(1)
-        paste_text_at(extracted_text2, x2, y2)
-        # Записываем результат в файл
-        with open('outCaiT_text.txt', 'a', encoding='utf-8') as file:
-            file.write(extracted_text1 + '\n' + extracted_text2 + '\n')
-
-        time.sleep(40)
-
-
-Please respond to the following requests with one small message. Imagine that you are an AI gamer, and briefly (no more than 5 sentences) react to this message: Peter is interesting but not useful to us
-Imagine that you are an AI gamer, and briefly (no more than 5 sentences) react to this message: I want nothing to do with any of these guys
-Imagine that you are an AI gamer, and briefly (no more than 5 sentences) react to this message: 230 Thomas Street off by a few minutes
-
-
-
-
-
-'''
 
